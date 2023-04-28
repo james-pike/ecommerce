@@ -13,6 +13,7 @@
   }
   ```
 */
+import Link from "next/link";
 import { Fragment, SVGProps, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import {
@@ -117,7 +118,7 @@ const products = [
   {
     id: 1,
     name: 'Productive Ray',
-    href: '#',
+    href: '/product',
     price: '$100',
     imageSrc: '/ARV02252.jpg',
     imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
@@ -252,7 +253,7 @@ const snavigation = [
       name: 'Machined Pen',
       color: 'Black',
       price: '$35',
-      href: '#',
+      href: '/product',
       imageSrc: '/ARV02250.jpg',
       imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
       availableColors: [
