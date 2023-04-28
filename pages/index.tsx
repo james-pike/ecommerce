@@ -13,9 +13,15 @@
   }
   ```
 */
-import { Fragment, useState } from 'react'
+import { Fragment, SVGProps, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  Bars3Icon,
+  MagnifyingGlassIcon,
+  QuestionMarkCircleIcon,
+  ShoppingBagIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
@@ -24,57 +30,60 @@ const navigation = {
     {
       name: 'Women',
       featured: [
-        { name: 'Sleep', href: '#' },
-        { name: 'Swimwear', href: '#' },
-        { name: 'Underwear', href: '#' },
-      ],
-      collection: [
-        { name: 'Everything', href: '#' },
-        { name: 'Core', href: '#' },
-        { name: 'New Arrivals', href: '#' },
-        { name: 'Sale', href: '#' },
-      ],
-      categories: [
-        { name: 'Basic Tees', href: '#' },
-        { name: 'Artwork Tees', href: '#' },
-        { name: 'Bottoms', href: '#' },
-        { name: 'Underwear', href: '#' },
-        { name: 'Accessories', href: '#' },
-      ],
-      brands: [
-        { name: 'Full Nelson', href: '#' },
-        { name: 'My Way', href: '#' },
-        { name: 'Re-Arranged', href: '#' },
-        { name: 'Counterfeit', href: '#' },
-        { name: 'Significant Other', href: '#' },
+        {
+          name: 'New Arrivals',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
+          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+        },
+        {
+          name: 'Basic Tees',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
+          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+        },
+        {
+          name: 'Accessories',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg',
+          imageAlt: 'Model wearing minimalist watch with black wristband and white watch face.',
+        },
+        {
+          name: 'Carry',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg',
+          imageAlt: 'Model opening tan leather long wallet with credit card pockets and cash pouch.',
+        },
       ],
     },
     {
       name: 'Men',
       featured: [
-        { name: 'Casual', href: '#' },
-        { name: 'Boxers', href: '#' },
-        { name: 'Outdoor', href: '#' },
-      ],
-      collection: [
-        { name: 'Everything', href: '#' },
-        { name: 'Core', href: '#' },
-        { name: 'New Arrivals', href: '#' },
-        { name: 'Sale', href: '#' },
-      ],
-      categories: [
-        { name: 'Artwork Tees', href: '#' },
-        { name: 'Pants', href: '#' },
-        { name: 'Accessories', href: '#' },
-        { name: 'Boxers', href: '#' },
-        { name: 'Basic Tees', href: '#' },
-      ],
-      brands: [
-        { name: 'Significant Other', href: '#' },
-        { name: 'My Way', href: '#' },
-        { name: 'Counterfeit', href: '#' },
-        { name: 'Re-Arranged', href: '#' },
-        { name: 'Full Nelson', href: '#' },
+        {
+          name: 'New Arrivals',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg',
+          imageAlt: 'Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.',
+        },
+        {
+          name: 'Basic Tees',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg',
+          imageAlt: 'Model wearing light heather gray t-shirt.',
+        },
+        {
+          name: 'Accessories',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg',
+          imageAlt:
+            'Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.',
+        },
+        {
+          name: 'Carry',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg',
+          imageAlt: 'Model putting folded cash into slim card holder olive leather wallet with hand stitching.',
+        },
       ],
     },
   ],
@@ -83,19 +92,211 @@ const navigation = {
     { name: 'Stores', href: '#' },
   ],
 }
-const offers = [
-  { name: 'Download the app', description: 'Get an exclusive $5 off code', href: '#' },
-  { name: "Return when you're ready", description: '60 days of free returns', href: '#' },
-  { name: 'Sign up for our newsletter', description: '15% off your first order', href: '#' },
+const collections = [
+  {
+    name: "Women's",
+    href: '#',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg',
+    imageAlt: 'Woman wearing a comfortable cotton t-shirt.',
+  },
+  {
+    name: "Men's",
+    href: '#',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg',
+    imageAlt: 'Man wearing a comfortable and casual cotton t-shirt.',
+  },
+  {
+    name: 'Desk Accessories',
+    href: '#',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
+    imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
+  },
 ]
-const trendingProducts = [
+
+const products = [
+  {
+    id: 1,
+    name: 'Productive Ray',
+    href: '#',
+    price: '$100',
+    imageSrc: '/ARV02252.jpg',
+    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+  },
+ 
+  {
+    id: 2,
+    name: 'Model Ray',
+    href: '#',
+    price: '$100',
+    imageSrc: '/ARV02221c.jpg',
+    imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
+  },
+
+  {
+    id: 3,
+    name: 'Cute Ray',
+    href: '#',
+    price: '$100',
+    imageSrc: '/ARV02254.jpg',
+    imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
+  },
+
+  {
+    id: 4,
+    name: 'Skeptical Ray',
+    href: '#',
+    price: '$100',
+    imageSrc: '/ARV02267.jpg',
+    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+  },
+  // More products...
+]
+const testimonials = [
+  
+  {
+    body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+    author: {
+      name: 'Leslie Alexander',
+      handle: 'lesliealexander',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+  },
+  {
+    body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+    author: {
+      name: 'Leslie Alexander',
+      handle: 'lesliealexander',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+  },
+  {
+    body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+    author: {
+      name: 'Leslie Alexander',
+      handle: 'lesliealexander',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+  },
+  // More testimonials...
+]
+
+const snavigation = [
+  {
+    name: 'Facebook',
+    href: '#',
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path
+          fillRule="evenodd"
+          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: '#',
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path
+          fillRule="evenodd"
+          d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: 'Twitter',
+    href: '#',
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+      </svg>
+    ),
+  },
+  {
+    name: 'GitHub',
+    href: '#',
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path
+          fillRule="evenodd"
+          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: '#',
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path
+          fillRule="evenodd"
+          d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
+]
+  const trendingProducts = [
+    {
+      id: 1,
+      name: 'Machined Pen',
+      color: 'Black',
+      price: '$35',
+      href: '#',
+      imageSrc: '/ARV02250.jpg',
+      imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
+      availableColors: [
+        { name: 'Black', colorBg: '#111827' },
+        { name: 'Brass', colorBg: '#FDE68A' },
+        { name: 'Chrome', colorBg: '#E5E7EB' },
+      ],
+    },
+
+    {
+      id: 1,
+      name: 'Machined Pen',
+      color: 'Black',
+      price: '$35',
+      href: '#',
+      imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg',
+      imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
+      availableColors: [
+        { name: 'Black', colorBg: '#111827' },
+        { name: 'Brass', colorBg: '#FDE68A' },
+        { name: 'Chrome', colorBg: '#E5E7EB' },
+      ],
+    },
+    {
+      id: 1,
+      name: 'Machined Pen',
+      color: 'Black',
+      price: '$35',
+      href: '#',
+      imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg',
+      imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
+      availableColors: [
+        { name: 'Black', colorBg: '#111827' },
+        { name: 'Brass', colorBg: '#FDE68A' },
+        { name: 'Chrome', colorBg: '#E5E7EB' },
+      ],
+    },
   {
     id: 1,
     name: 'Machined Pen',
     color: 'Black',
     price: '$35',
     href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg',
+    imageSrc: '/ARV02267.jpg',
     imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
     availableColors: [
       { name: 'Black', colorBg: '#111827' },
@@ -105,47 +306,27 @@ const trendingProducts = [
   },
   // More products...
 ]
-const collections = [
+const perks = [
   {
-    name: 'Desk and Office',
-    description: 'Work from home accessories',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
-    imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-    href: '#',
+    name: 'Free returns',
+    imageUrl: 'https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg',
+    description: 'Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.',
   },
   {
-    name: 'Self-Improvement',
-    description: 'Journals and note-taking',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
-    imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-    href: '#',
+    name: 'Same day delivery',
+    imageUrl: 'https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg',
+    description:
+      'We offer a delivery service that has never been done before. Checkout today and receive your products within hours.',
   },
   {
-    name: 'Travel',
-    description: 'Daily commute essentials',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-    href: '#',
-  },
-]
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      'My order arrived super quickly. The product is even better than I hoped it would be. Very happy customer over here!',
-    attribution: 'Sarah Peters, New Orleans',
+    name: 'All year discount',
+    imageUrl: 'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
+    description: 'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
   },
   {
-    id: 2,
-    quote:
-      'I had to return a purchase that didn’t fit. The whole process was so simple that I ended up ordering two new items!',
-    attribution: 'Kelly McPherson, Chicago',
-  },
-  {
-    id: 3,
-    quote:
-      'Now that I’m on holiday for the summer, I’ll probably order a few more shirts. It’s just so convenient, and I know the quality will always be there.',
-    attribution: 'Chris Paul, Phoenix',
+    name: 'For the planet',
+    imageUrl: 'https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg',
+    description: 'We’ve pledged 1% of sales to the preservation and restoration of the natural environment.',
   },
 ]
 const footerNavigation = {
@@ -191,13 +372,13 @@ function classNames(...classes: string[]) {
 }
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-      <Transition.Root show={mobileMenuOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileMenuOpen}>
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -225,7 +406,7 @@ export default function Example() {
                   <button
                     type="button"
                     className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -252,74 +433,23 @@ export default function Example() {
                     </Tab.List>
                   </div>
                   <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category, categoryIdx) => (
-                      <Tab.Panel key={category.name} className="space-y-12 px-4 pb-6 pt-10">
-                        <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10">
-                          <div className="grid grid-cols-1 gap-x-6 gap-y-10">
-                            <div>
-                              <p id={`mobile-featured-heading-${categoryIdx}`} className="font-medium text-gray-900">
-                                Featured
+                    {navigation.categories.map((category) => (
+                      <Tab.Panel key={category.name} className="space-y-12 px-4 py-6">
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-10">
+                          {category.featured.map((item) => (
+                            <div key={item.name} className="group relative">
+                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
+                              </div>
+                              <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
+                                <span className="absolute inset-0 z-10" aria-hidden="true" />
+                                {item.name}
+                              </a>
+                              <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
+                                Shop now
                               </p>
-                              <ul
-                                role="list"
-                                aria-labelledby={`mobile-featured-heading-${categoryIdx}`}
-                                className="mt-6 space-y-6"
-                              >
-                                {category.featured.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
                             </div>
-                            <div>
-                              <p id="mobile-categories-heading" className="font-medium text-gray-900">
-                                Categories
-                              </p>
-                              <ul role="list" aria-labelledby="mobile-categories-heading" className="mt-6 space-y-6">
-                                {category.categories.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-1 gap-x-6 gap-y-10">
-                            <div>
-                              <p id="mobile-collection-heading" className="font-medium text-gray-900">
-                                Collection
-                              </p>
-                              <ul role="list" aria-labelledby="mobile-collection-heading" className="mt-6 space-y-6">
-                                {category.collection.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            <div>
-                              <p id="mobile-brand-heading" className="font-medium text-gray-900">
-                                Brands
-                              </p>
-                              <ul role="list" aria-labelledby="mobile-brand-heading" className="mt-6 space-y-6">
-                                {category.brands.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </Tab.Panel>
                     ))}
@@ -379,7 +509,7 @@ export default function Example() {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative z-10">
+      <header className="relative">
         <nav aria-label="Top">
           {/* Top navigation */}
           <div className="bg-gray-900">
@@ -425,219 +555,168 @@ export default function Example() {
 
           {/* Secondary navigation */}
           <div className="bg-white">
-            <div className="border-b border-gray-200">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
-                  {/* Logo (lg+) */}
-                  <div className="hidden lg:flex lg:items-center">
-                    <a href="#">
-                      <span className="sr-only">Your Company</span>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-
-                  <div className="hidden h-full lg:flex">
-                    {/* Mega menus */}
-                    <Popover.Group className="ml-8">
-                      <div className="flex h-full justify-center space-x-8">
-                        {navigation.categories.map((category, categoryIdx) => (
-                          <Popover key={category.name} className="flex">
-                            {({ open }) => (
-                              <>
-                                <div className="relative flex">
-                                  <Popover.Button
-                                    className={classNames(
-                                      open
-                                        ? 'border-indigo-600 text-indigo-600'
-                                        : 'border-transparent text-gray-700 hover:text-gray-800',
-                                      'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
-                                    )}
-                                  >
-                                    {category.name}
-                                  </Popover.Button>
-                                </div>
-
-                                <Transition
-                                  as={Fragment}
-                                  enter="transition ease-out duration-200"
-                                  enterFrom="opacity-0"
-                                  enterTo="opacity-100"
-                                  leave="transition ease-in duration-150"
-                                  leaveFrom="opacity-100"
-                                  leaveTo="opacity-0"
-                                >
-                                  <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm">
-                                    {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                    <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
-
-                                    <div className="relative bg-white">
-                                      <div className="mx-auto max-w-7xl px-8">
-                                        <div className="grid grid-cols-2 items-start gap-x-8 gap-y-10 pb-12 pt-10">
-                                          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            <div>
-                                              <p
-                                                id={`desktop-featured-heading-${categoryIdx}`}
-                                                className="font-medium text-gray-900"
-                                              >
-                                                Featured
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby={`desktop-featured-heading-${categoryIdx}`}
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {category.featured.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                            <div>
-                                              <p id="desktop-categories-heading" className="font-medium text-gray-900">
-                                                Categories
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-categories-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {category.categories.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                          </div>
-                                          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            <div>
-                                              <p id="desktop-collection-heading" className="font-medium text-gray-900">
-                                                Collection
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-collection-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {category.collection.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-
-                                            <div>
-                                              <p id="desktop-brand-heading" className="font-medium text-gray-900">
-                                                Brands
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-brand-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {category.brands.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Popover.Panel>
-                                </Transition>
-                              </>
-                            )}
-                          </Popover>
-                        ))}
-
-                        {navigation.pages.map((page) => (
-                          <a
-                            key={page.name}
-                            href={page.href}
-                            className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                          >
-                            {page.name}
-                          </a>
-                        ))}
-                      </div>
-                    </Popover.Group>
-                  </div>
-
-                  {/* Mobile menu and search (lg-) */}
-                  <div className="flex flex-1 items-center lg:hidden">
-                    <button
-                      type="button"
-                      className="-ml-2 rounded-md bg-white p-2 text-gray-400"
-                      onClick={() => setMobileMenuOpen(true)}
-                    >
-                      <span className="sr-only">Open menu</span>
-                      <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    {/* Search */}
-                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
-                      <span className="sr-only">Search</span>
-                      <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    </a>
-                  </div>
-
-                  {/* Logo (lg-) */}
-                  <a href="#" className="lg:hidden">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex h-16 items-center justify-between">
+                {/* Logo (lg+) */}
+                <div className="hidden lg:flex lg:flex-1 lg:items-center">
+                  <a href="#">
                     <span className="sr-only">Your Company</span>
                     <img
+                      className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt=""
-                      className="h-8 w-auto"
                     />
                   </a>
+                </div>
 
-                  <div className="flex flex-1 items-center justify-end">
-                    <div className="flex items-center lg:ml-8">
-                      <div className="flex space-x-8">
-                        <div className="hidden lg:flex">
-                          <a href="#" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">Search</span>
-                            <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                          </a>
-                        </div>
+                <div className="hidden h-full lg:flex">
+                  {/* Flyout menus */}
+                  <Popover.Group className="inset-x-0 bottom-0 px-4">
+                    <div className="flex h-full justify-center space-x-8">
+                      {navigation.categories.map((category) => (
+                        <Popover key={category.name} className="flex">
+                          {({ open }) => (
+                            <>
+                              <div className="relative flex">
+                                <Popover.Button
+                                  className={classNames(
+                                    open ? 'text-indigo-600' : 'text-gray-700 hover:text-gray-800',
+                                    'relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out'
+                                  )}
+                                >
+                                  {category.name}
+                                  <span
+                                    className={classNames(
+                                      open ? 'bg-indigo-600' : '',
+                                      'absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out'
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                </Popover.Button>
+                              </div>
 
-                        <div className="flex">
-                          <a href="#" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">Account</span>
-                            <UserIcon className="h-6 w-6" aria-hidden="true" />
-                          </a>
-                        </div>
-                      </div>
+                              <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-200"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                                leave="transition ease-in duration-150"
+                                leaveFrom="opacity-100"
+                                leaveTo="opacity-0"
+                              >
+                                <Popover.Panel className="absolute inset-x-0 top-full z-10 bg-white text-sm text-gray-500">
+                                  {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                                  <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+                                  {/* Fake border when menu is open */}
+                                  <div
+                                    className="absolute inset-0 top-0 mx-auto h-px max-w-7xl px-8"
+                                    aria-hidden="true"
+                                  >
+                                    <div
+                                      className={classNames(
+                                        open ? 'bg-gray-200' : 'bg-transparent',
+                                        'h-px w-full transition-colors duration-200 ease-out'
+                                      )}
+                                    />
+                                  </div>
 
-                      <span className="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
+                                  <div className="relative">
+                                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                      <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
+                                        {category.featured.map((item) => (
+                                          <div key={item.name} className="group relative">
+                                            <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                              <img
+                                                src={item.imageSrc}
+                                                alt={item.imageAlt}
+                                                className="object-cover object-center"
+                                              />
+                                            </div>
+                                            <a href={item.href} className="mt-4 block font-medium text-gray-900">
+                                              <span className="absolute inset-0 z-10" aria-hidden="true" />
+                                              {item.name}
+                                            </a>
+                                            <p aria-hidden="true" className="mt-1">
+                                              Shop now
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </Popover.Panel>
+                              </Transition>
+                            </>
+                          )}
+                        </Popover>
+                      ))}
 
-                      <div className="flow-root">
-                        <a href="#" className="group -m-2 flex items-center p-2">
-                          <ShoppingCartIcon
-                            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                          <span className="sr-only">items in cart, view bag</span>
+                      {navigation.pages.map((page) => (
+                        <a
+                          key={page.name}
+                          href={page.href}
+                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                        >
+                          {page.name}
                         </a>
-                      </div>
+                      ))}
+                    </div>
+                  </Popover.Group>
+                </div>
+
+                {/* Mobile menu and search (lg-) */}
+                <div className="flex flex-1 items-center lg:hidden">
+                  <button
+                    type="button"
+                    className="-ml-2 rounded-md bg-white p-2 text-gray-400"
+                    onClick={() => setOpen(true)}
+                  >
+                    <span className="sr-only">Open menu</span>
+                    <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+
+                  {/* Search */}
+                  <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                    <span className="sr-only">Search</span>
+                    <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                  </a>
+                </div>
+
+                {/* Logo (lg-) */}
+                <a href="#" className="lg:hidden">
+                  <span className="sr-only">Your Company</span>
+                  <img
+                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    alt=""
+                    className="h-8 w-auto"
+                  />
+                </a>
+
+                <div className="flex flex-1 items-center justify-end">
+                  <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                    Search
+                  </a>
+
+                  <div className="flex items-center lg:ml-8">
+                    {/* Help */}
+                    <a href="#" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
+                      <span className="sr-only">Help</span>
+                      <QuestionMarkCircleIcon className="h-6 w-6" aria-hidden="true" />
+                    </a>
+                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                      Help
+                    </a>
+
+                    {/* Cart */}
+                    <div className="ml-4 flow-root lg:ml-8">
+                      <a href="#" className="group -m-2 flex items-center p-2">
+                        <ShoppingBagIcon
+                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                        <span className="sr-only">items in cart, view bag</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -648,65 +727,40 @@ export default function Example() {
       </header>
 
       <main>
-        {/* Hero */}
-        <div className="flex flex-col border-b border-gray-200 lg:border-0">
-          <nav aria-label="Offers" className="order-last lg:order-first">
-            <div className="mx-auto max-w-7xl lg:px-8">
-              <ul
-                role="list"
-                className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0"
-              >
-                {offers.map((offer) => (
-                  <li key={offer.name} className="flex flex-col">
-                    <a
-                      href={offer.href}
-                      className="relative flex flex-1 flex-col justify-center bg-white px-4 py-6 text-center focus:z-10"
-                    >
-                      <p className="text-sm text-gray-500">{offer.name}</p>
-                      <p className="font-semibold text-gray-900">{offer.description}</p>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
+        {/* Hero section */}
+        <div className="relative">
+  {/* Background image */}
+  <div aria-hidden="true" className="absolute inset-0">
+    <img
+      src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+      alt=""
+      className="h-full w-full object-cover object-center"
+    />
+    <div className="absolute inset-0 bg-gray-900 opacity-50" />
+  </div>
 
-          <div className="relative">
-            <div aria-hidden="true" className="absolute hidden h-full w-1/2 bg-gray-100 lg:block" />
-            <div className="relative bg-gray-100 lg:bg-transparent">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8">
-                <div className="mx-auto max-w-2xl py-24 lg:max-w-none lg:py-64">
-                  <div className="lg:pr-16">
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl xl:text-6xl">
-                      Focus on what matters
-                    </h1>
-                    <p className="mt-4 text-xl text-gray-600">
-                      All the charts, datepickers, and notifications in the world can't beat checking off some items on
-                      a paper card.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
-                      >
-                        Shop Productivity
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="h-48 w-full sm:h-64 lg:absolute lg:right-0 lg:top-0 lg:h-full lg:w-1/2">
-              <img
-                src="https://tailwindui.com/img/ecommerce-images/home-page-02-hero-half-width.jpg"
-                alt=""
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-        </div>
+  <div className="relative mx-auto max-w-3xl px-4 pb-96 text-center sm:px-6 sm:pb-0 lg:px-8">
+    <div className="relative py-32">
+      <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Mid-Season Sale</h1>
+      <div className="mt-4 sm:mt-6">
+        <a
+          href="#"
+          className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
+        >
+          Shop Collection
+        </a>
+      </div>
+    </div>
+  </div>
 
-        {/* Trending products */}
+  <section aria-labelledby="collection-heading" className="relative -mt-96 sm:-mt-10">
+    <h2 id="collection-heading" className="sr-only">
+      Collections
+    </h2>
+   
+  </section>
+</div>
+
         <section aria-labelledby="trending-heading" className="bg-white">
           <div className="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8 lg:py-32">
             <div className="flex items-center justify-between px-4 sm:px-6 lg:px-0">
@@ -719,51 +773,27 @@ export default function Example() {
               </a>
             </div>
 
-            <div className="relative mt-8">
-              <div className="relative w-full overflow-x-auto">
-                <ul
-                  role="list"
-                  className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0"
-                >
-                  {trendingProducts.map((product) => (
-                    <li key={product.id} className="inline-flex w-64 flex-col text-center lg:w-auto">
-                      <div className="group relative">
-                        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200">
-                          <img
-                            src={product.imageSrc}
-                            alt={product.imageAlt}
-                            className="h-full w-full object-cover object-center group-hover:opacity-75"
-                          />
-                        </div>
-                        <div className="mt-6">
-                          <p className="text-sm text-gray-500">{product.color}</p>
-                          <h3 className="mt-1 font-semibold text-gray-900">
-                            <a href={product.href}>
-                              <span className="absolute inset-0" />
-                              {product.name}
-                            </a>
-                          </h3>
-                          <p className="mt-1 text-gray-900">{product.price}</p>
-                        </div>
-                      </div>
+            <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="sr-only">Products</h2>
 
-                      <h4 className="sr-only">Available colors</h4>
-                      <ul role="list" className="mt-auto flex items-center justify-center space-x-3 pt-6">
-                        {product.availableColors.map((color) => (
-                          <li
-                            key={color.name}
-                            className="h-4 w-4 rounded-full border border-black border-opacity-10"
-                            style={{ backgroundColor: color.colorBg }}
-                          >
-                            <span className="sr-only">{color.name}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <a key={product.id} href={product.href} className="group">
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img
+                  src={product.imageSrc}
+                  alt={product.imageAlt}
+                  className="h-full w-full object-cover object-center group-hover:opacity-75"
+                />
               </div>
-            </div>
+              <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+              <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
 
             <div className="mt-12 px-4 sm:hidden">
               <a href="#" className="text-sm font-semibold text-indigo-600 hover:text-indigo-500">
@@ -774,39 +804,7 @@ export default function Example() {
           </div>
         </section>
 
-        {/* Collections */}
-        <section aria-labelledby="collections-heading" className="bg-gray-100">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-              <h2 id="collections-heading" className="text-2xl font-bold text-gray-900">
-                Collections
-              </h2>
-
-              <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                {collections.map((collection) => (
-                  <div key={collection.name} className="group relative">
-                    <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                      <img
-                        src={collection.imageSrc}
-                        alt={collection.imageAlt}
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </div>
-                    <h3 className="mt-6 text-sm text-gray-500">
-                      <a href={collection.href}>
-                        <span className="absolute inset-0" />
-                        {collection.name}
-                      </a>
-                    </h3>
-                    <p className="text-base font-semibold text-gray-900">{collection.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Sale and testimonials */}
+        
         <div className="relative overflow-hidden">
           {/* Decorative background image and gradient */}
           <div aria-hidden="true" className="absolute inset-0">
@@ -844,196 +842,121 @@ export default function Example() {
           </section>
 
           {/* Testimonials */}
-          <section
-            aria-labelledby="testimonial-heading"
-            className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32"
-          >
-            <div className="mx-auto max-w-2xl lg:max-w-none">
-              <h2 id="testimonial-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-                What are people saying?
-              </h2>
-
-              <div className="mt-16 space-y-16 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
-                {testimonials.map((testimonial) => (
-                  <blockquote key={testimonial.id} className="sm:flex lg:block">
-                    <svg
-                      width={24}
-                      height={18}
-                      viewBox="0 0 24 18"
-                      aria-hidden="true"
-                      className="flex-shrink-0 text-gray-300"
-                    >
-                      <path
-                        d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <div className="mt-8 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-10">
-                      <p className="text-lg text-gray-600">{testimonial.quote}</p>
-                      <cite className="mt-4 block font-semibold not-italic text-gray-900">
-                        {testimonial.attribution}
-                      </cite>
-                    </div>
-                  </blockquote>
-                ))}
-              </div>
-            </div>
-          </section>
+       <section aria-labelledby="testimonial-heading" class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+  <div class="bg-white py-8 sm:py-8">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-xl text-center">
+        <h2 class="text-lg font-semibold leading-8 tracking-tight text-indigo-600">Testimonials</h2>
+        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">We have worked with thousands of amazing people</p>
+      </div>
+      <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+        <div class="-mt-8 sm:-mx-4 sm:grid sm:grid-cols-3">
+          {testimonials.map((testimonial) => (
+          <div key={testimonial.author.handle} class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <figure class="rounded-2xl bg-gray-50 p-8 text-sm leading-6">
+              <blockquote class="text-gray-900">
+                <p>{`“${testimonial.body}”`}</p>
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-x-4">
+                <img class="h-10 w-10 rounded-full bg-gray-50" src={testimonial.author.imageUrl} alt="" />
+                <div>
+                  <div class="font-semibold text-gray-900">{testimonial.author.name}</div>
+                  <div class="text-gray-600">{`@${testimonial.author.handle}`}</div>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+          ))}
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+        </div>
+        <section aria-labelledby="perks-heading" className="border-t border-gray-200 bg-gray-50">
+          <h2 id="perks-heading" className="sr-only">
+            Our perks
+          </h2>
+
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+            <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-0">
+              {perks.map((perk) => (
+                <div
+                  key={perk.name}
+                  className="text-center md:flex md:items-start md:text-left lg:block lg:text-center"
+                >
+                  <div className="md:flex-shrink-0">
+                    <div className="flow-root">
+                      <img className="-my-1 mx-auto h-24 w-auto" src={perk.imageUrl} alt="" />
+                    </div>
+                  </div>
+                  <div className="mt-6 md:ml-4 md:mt-0 lg:ml-0 lg:mt-6">
+                    <h3 className="text-base font-medium text-gray-900">{perk.name}</h3>
+                    <p className="mt-3 text-sm text-gray-500">{perk.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer aria-labelledby="footer-heading" className="bg-white">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-200">
-            <div className="pb-20 pt-16">
-              <div className="md:flex md:justify-center">
-                <img
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                  className="h-8 w-auto"
-                />
-              </div>
-              <div className="mx-auto mt-16 max-w-5xl xl:grid xl:grid-cols-2 xl:gap-8">
-                <div className="grid grid-cols-2 gap-8 xl:col-span-2">
-                  <div className="space-y-12 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">Products</h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.products.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a href={item.href} className="text-gray-500 hover:text-gray-600">
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">Customer Service</h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.customerService.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a href={item.href} className="text-gray-500 hover:text-gray-600">
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="space-y-12 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">Company</h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.company.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a href={item.href} className="text-gray-500 hover:text-gray-600">
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">Legal</h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.legal.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a href={item.href} className="text-gray-500 hover:text-gray-600">
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:grid lg:grid-cols-2 lg:gap-x-6 xl:gap-x-8">
-              <div className="flex items-center rounded-lg bg-gray-100 p-6 sm:p-10">
-                <div className="mx-auto max-w-sm">
-                  <h3 className="font-semibold text-gray-900">Sign up for our newsletter</h3>
-                  <p className="mt-2 text-sm text-gray-500">
-                    The latest news, articles, and resources, sent to your inbox weekly.
-                  </p>
-                  <form className="mt-4 sm:mt-6 sm:flex">
-                    <label htmlFor="email-address" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="email-address"
-                      type="text"
-                      autoComplete="email"
-                      required
-                      className="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    />
-                    <div className="mt-3 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
-                      <button
-                        type="submit"
-                        className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white"
-                      >
-                        Sign up
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div className="relative mt-6 flex items-center px-6 py-12 sm:px-10 sm:py-16 lg:mt-0">
-                <div className="absolute inset-0 overflow-hidden rounded-lg">
-                  <img
-                    src="https://tailwindui.com/img/ecommerce-images/footer-02-exclusive-sale.jpg"
-                    alt=""
-                    className="h-full w-full object-cover object-center saturate-0 filter"
-                  />
-                  <div className="absolute inset-0 bg-indigo-600 bg-opacity-90" />
-                </div>
-                <div className="relative mx-auto max-w-sm text-center">
-                  <h3 className="text-2xl font-bold tracking-tight text-white">Get early access</h3>
-                  <p className="mt-2 text-gray-200">
-                    Did you sign up to the newsletter? If so, use the keyword we sent you to get access.{' '}
-                    <a href="#" className="whitespace-nowrap font-bold text-white hover:text-gray-200">
-                      Go now<span aria-hidden="true"> &rarr;</span>
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="py-10 md:flex md:items-center md:justify-between">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-gray-500">&copy; 2021 All Rights Reserved</p>
-            </div>
-
-            <div className="mt-4 flex items-center justify-center md:mt-0">
-              <div className="flex space-x-8">
-                {footerNavigation.bottomLinks.map((item) => (
-                  <a key={item.name} href={item.href} className="text-sm text-gray-500 hover:text-gray-600">
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-
-              <div className="ml-6 border-l border-gray-200 pl-6">
-                <a href="#" className="flex items-center text-gray-500 hover:text-gray-600">
-                  <img
-                    src="https://tailwindui.com/img/flags/flag-canada.svg"
-                    alt=""
-                    className="h-auto w-5 flex-shrink-0"
-                  />
-                  <span className="ml-3 text-sm">Change</span>
-                  <span className="sr-only">location and currency</span>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div className="bg-indigo-700 py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
+        <div className="max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:col-span-7">
+          <h2 className="inline sm:block lg:inline xl:block">Want product news and updates?</h2>{' '}
+          <p className="inline sm:block lg:inline xl:block">Sign up for our newsletter!</p>
         </div>
+        <form className="w-full max-w-md lg:col-span-5 lg:pt-2">
+          <div className="flex gap-x-4">
+            <label htmlFor="email-address" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="min-w-0 flex-auto rounded-md border-0 bg-white/10 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-white/75 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
+              placeholder="Enter your email"
+            />
+            <button
+              type="submit"
+              className="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Subscribe
+            </button>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-gray-300">
+            We'll take care of your data. Read our{' '}
+            <a href="#" className="font-semibold text-white hover:text-indigo-50">
+              privacy&nbsp;policy
+            </a>
+            .
+          </p>
+        </form>
+      </div>
+    </div>
+    <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+        <div className="flex justify-center space-x-6 md:order-2">
+          {snavigation.map((item) => (
+            <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
+              <span className="sr-only">{item.name}</span>
+              <item.icon className="h-6 w-6" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+        <div className="mt-8 md:order-1 md:mt-0">
+          <p className="text-center text-xs leading-5 text-gray-500">
+            &copy; 2023 Your Company, Inc. All rights reserved.
+          </p>
+        </div>
+      </div>
       </footer>
     </div>
   )
