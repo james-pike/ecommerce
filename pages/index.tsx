@@ -842,26 +842,26 @@ export default function Example() {
           </section>
 
           {/* Testimonials */}
-       <section aria-labelledby="testimonial-heading" class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-  <div class="bg-white py-8 sm:py-8">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-xl text-center">
-        <h2 class="text-lg font-semibold leading-8 tracking-tight text-indigo-600">Testimonials</h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">We have worked with thousands of amazing people</p>
+       <section aria-labelledby="testimonial-heading" className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+  <div className="bg-white py-8 sm:py-8">
+    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-xl text-center">
+        <h2 className="text-lg font-semibold leading-8 tracking-tight text-indigo-600">Testimonials</h2>
+        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">We have worked with thousands of amazing people</p>
       </div>
-      <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
-        <div class="-mt-8 sm:-mx-4 sm:grid sm:grid-cols-3">
+      <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+        <div className="-mt-8 sm:-mx-4 sm:grid sm:grid-cols-3">
           {testimonials.map((testimonial) => (
-          <div key={testimonial.author.handle} class="pt-8 sm:inline-block sm:w-full sm:px-4">
-            <figure class="rounded-2xl bg-gray-50 p-8 text-sm leading-6">
-              <blockquote class="text-gray-900">
+          <div key={testimonial.author.handle} className="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <figure className="rounded-2xl bg-gray-50 p-8 text-sm leading-6">
+              <blockquote className="text-gray-900">
                 <p>{`“${testimonial.body}”`}</p>
               </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
-                <img class="h-10 w-10 rounded-full bg-gray-50" src={testimonial.author.imageUrl} alt="" />
+              <figcaption className="mt-6 flex items-center gap-x-4">
+                <img className="h-10 w-10 rounded-full bg-gray-50" src={testimonial.author.imageUrl} alt="" />
                 <div>
-                  <div class="font-semibold text-gray-900">{testimonial.author.name}</div>
-                  <div class="text-gray-600">{`@${testimonial.author.handle}`}</div>
+                  <div className="font-semibold text-gray-900">{testimonial.author.name}</div>
+                  <div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
                 </div>
               </figcaption>
             </figure>
