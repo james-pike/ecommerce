@@ -13,7 +13,10 @@
   }
   ```
 */
-import Link from "next/link";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import EmblaCarousel from './carousel'
+import { EmblaOptionsType } from 'embla-carousel-react'
 import { Fragment, SVGProps, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import {
@@ -24,6 +27,11 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+
+const OPTIONS: EmblaOptionsType = {}
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
@@ -113,6 +121,8 @@ const collections = [
     imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
   },
 ]
+
+
 
 const products = [
   {
@@ -371,6 +381,19 @@ const footerNavigation = {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
+
+
+
+const App: React.FC = () => (
+  <main className="sandbox">
+    <section className="sandbox__carousel">
+      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+    </section>
+  </main>
+)
+
+
+
 
 export default function Example() {
   const [open, setOpen] = useState(false)
@@ -728,10 +751,13 @@ export default function Example() {
       </header>
 
       <main>
+      <section className="sandbox__carousel" style={{ marginTop: "-1.5rem" }}>
+      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+    </section>
         {/* Hero section */}
-        <div className="relative">
+      
   {/* Background image */}
-  <div aria-hidden="true" className="absolute inset-0">
+  {/* <div aria-hidden="true" className="absolute inset-0">
     <img
       src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
       alt=""
@@ -754,13 +780,17 @@ export default function Example() {
     </div>
   </div>
 
+  
   <section aria-labelledby="collection-heading" className="relative -mt-96 sm:-mt-10">
     <h2 id="collection-heading" className="sr-only">
       Collections
     </h2>
    
   </section>
-</div>
+
+                      */}
+
+
 
         <section aria-labelledby="trending-heading" className="bg-white">
           <div className="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8 lg:py-32">
