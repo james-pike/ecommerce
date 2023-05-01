@@ -5,7 +5,7 @@ import {
   PrevButton,
   NextButton,
 } from './cx'
-import imageByIndex from './ci'
+//import imageByIndex from './ci'
 
 type PropType = {
   slides: number[]
