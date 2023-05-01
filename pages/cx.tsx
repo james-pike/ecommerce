@@ -63,3 +63,5 @@ export const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
     </button>
   )
 }
+
+export default DotButton;
